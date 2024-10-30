@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit
 
 
 class WheatherApi {
-    private lateinit var retrofit: Retrofit
+    private var retrofit: Retrofit? = null
 
     var baseUrl: String = "https://api.openweathermap.org"
 
@@ -18,12 +18,12 @@ class WheatherApi {
         .build()
 
     fun getClient(): Retrofit{
-
+        if(retrofit == null)
              retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        return retrofit
+        return retrofit as Retrofit
     }
 }
