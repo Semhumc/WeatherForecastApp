@@ -8,7 +8,7 @@ import com.example.wheatherapp.repository.WheatherRepository
 class WheatherViewModel(val repository : WheatherRepository):ViewModel() {
     constructor() : this(WheatherRepository(WheatherApi().getClient().create(ApiService::class.java)))
 
-    fun loadCurrentWeather(lat: Double, lng: Double, unit: String) =
-        repository.getCurrentWheather(lat, lng, unit)
+    fun loadCurrentWeather(lat: Double, lon: Double, unit: String) =
+        repository.getCurrentWheather(lat, lon, unit)
 
 }
