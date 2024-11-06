@@ -30,8 +30,8 @@ class IzmirFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val textView: TextView = view.findViewById(R.id.izmirTextView)
-        val temperatureTextView: TextView = view.findViewById(R.id.temperatureTextView)
-        val cityTextView: TextView = view.findViewById(R.id.cityTextView)
+        val temperatureTextView: TextView = view.findViewById(R.id.izmirTemperatureTextView)
+        val cityTextView: TextView = view.findViewById(R.id.izmirCityTextView)
 
 
         viewModel.loadCurrentWeather(38.4333, 27.15, "metric")

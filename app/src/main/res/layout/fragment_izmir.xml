@@ -2,7 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <TextView
+        android:id="@+id/izmirCityTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="75dp"
+        android:gravity="center"
+        android:text="Izmir"
+        android:textSize="40sp" />
     <TextView
         android:id="@+id/izmirTextView"
         android:layout_width="match_parent"
@@ -14,22 +22,14 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/temperatureTextView"
+        android:id="@+id/izmirTemperatureTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="130dp"
         android:gravity="center"
         android:text="Sıcaklık"
         android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/cityTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="75dp"
-        android:gravity="center"
-        android:text="Izmir"
-        android:textSize="40sp" />
+
 </FrameLayout>
