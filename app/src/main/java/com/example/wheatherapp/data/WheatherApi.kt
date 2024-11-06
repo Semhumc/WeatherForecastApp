@@ -3,11 +3,12 @@ package com.example.wheatherapp.data
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 
-class WheatherApi {
-    private var retrofit: Retrofit? = null
+object WheatherApi {
+
 
     var baseUrl: String = "https://api.openweathermap.org"
 
@@ -17,13 +18,15 @@ class WheatherApi {
         .writeTimeout(60, TimeUnit.SECONDS)
         .build()
 
-    fun getClient(): Retrofit{
-        if(retrofit == null)
-             retrofit = Retrofit.Builder()
+    private val retrofit : Retrofit by lazy {
+             Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        return retrofit as Retrofit
     }
+    fun getClient(): ApiService{
+        return retrofit.create(ApiService::class.java)
+    }
+
 }

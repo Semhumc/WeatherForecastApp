@@ -46,6 +46,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    
+    implementation ("androidx.fragment:fragment-ktx:1.5.7")
+
     //OkHttpClient
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     //Retrofit2
