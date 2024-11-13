@@ -32,7 +32,6 @@ class IstanbulFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textView: TextView = view.findViewById(R.id.istanbulTextView)
         val temperatureTextView: TextView = view.findViewById(R.id.istanbulTemperatureTextView)
         val cityTextView: TextView = view.findViewById(R.id.istanbulCityTextView)
 

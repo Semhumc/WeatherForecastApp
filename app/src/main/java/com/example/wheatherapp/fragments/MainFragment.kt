@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wheatherapp.adapter.RecyclerViewAdapter
 import com.example.wheatherapp.data.WheatherApi
 import com.example.wheatherapp.databinding.FragmentMainBinding
-import com.example.wheatherapp.databinding.ItemsBinding
 import com.example.wheatherapp.repository.WheatherRepository
 import com.example.wheatherapp.viewmodel.WeatherViewModel
 import com.example.wheatherapp.viewmodel.WheatherViewModelFactory
@@ -20,6 +21,8 @@ class MainFragment : Fragment() {
     private val viewModel: WeatherViewModel by viewModels {
         WheatherViewModelFactory(WheatherRepository(WheatherApi.getClient()))
     }
+
+    private lateinit var recyclerViewAdapter: RecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,30 +37,19 @@ class MainFragment : Fragment() {
 
         val cities = listOf("Istanbul", "Ankara", "Izmir")
 
-
-        viewModel.weatherData.observe(viewLifecycleOwner) { weatherList ->
-            weatherList.forEach { weather ->
-                addCityItem(
-                    cityName = weather.name ?: "Unknown City",
-                    temperature = weather.main?.temp?.toString() ?: "N/A",
-                )
-            }
+        // Set up RecyclerView
+        recyclerViewAdapter = RecyclerViewAdapter(emptyList())
+        binding.MainRecyclerview.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = recyclerViewAdapter
         }
 
-        // API çağrısı yap
+        // Observe weather data
+        viewModel.weatherData.observe(viewLifecycleOwner) { weatherList ->
+            recyclerViewAdapter.updateData(weatherList)
+        }
+
         viewModel.fetchWeatherForCities(cities)
-    }
-
-    private fun addCityItem(cityName: String, temperature: String) {
-        // items.xml'i şişir
-        val itemBinding = ItemsBinding.inflate(layoutInflater, binding.mainLinearLayout, false)
-
-        // Dinamik verileri ayarla
-        itemBinding.cityTextView.text = cityName
-        itemBinding.temperatureTextView.text = "$temperature°C"
-
-        // Şişirilen öğeyi ana layouta ekle
-        binding.mainLinearLayout.addView(itemBinding.root)
     }
 
     override fun onDestroyView() {

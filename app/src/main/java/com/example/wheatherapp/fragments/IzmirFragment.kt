@@ -4,44 +4,70 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.wheatherapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wheatherapp.adapter.ForecastRecyclerViewAdapter
 import com.example.wheatherapp.data.WheatherApi
+import com.example.wheatherapp.databinding.FragmentIzmirBinding
 import com.example.wheatherapp.repository.WheatherRepository
+import com.example.wheatherapp.viewmodel.ForecastViewModel
 import com.example.wheatherapp.viewmodel.SingleCityWeatherViewModel
 import com.example.wheatherapp.viewmodel.WheatherViewModelFactory
 
 class IzmirFragment : Fragment() {
-    private val viewModel: SingleCityWeatherViewModel by viewModels {
+
+    private var _binding: FragmentIzmirBinding? = null
+    private val binding get() = _binding!!
+
+    private val singleCityWeatherViewModel: SingleCityWeatherViewModel by viewModels {
         WheatherViewModelFactory(WheatherRepository(WheatherApi.getClient()))
     }
+
+    private val forecastViewModel: ForecastViewModel by viewModels {
+        WheatherViewModelFactory(WheatherRepository(WheatherApi.getClient()))
+    }
+
+    private lateinit var forecastAdapter: ForecastRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_izmir, container, false)
+    ): View {
+        _binding = FragmentIzmirBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textView: TextView = view.findViewById(R.id.izmirTextView)
-        val temperatureTextView: TextView = view.findViewById(R.id.izmirTemperatureTextView)
-        val cityTextView: TextView = view.findViewById(R.id.izmirCityTextView)
+        // RecyclerView setup
+        forecastAdapter = ForecastRecyclerViewAdapter(emptyList())
+        binding.forecastRecyclerview.apply {
+            adapter = forecastAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
 
-
-        viewModel.fetchWeatherForCity("Izmir" )
-
-        viewModel.weatherData.observe(viewLifecycleOwner) { weatherData ->
+        // Fetch current weather data for Izmir
+        singleCityWeatherViewModel.fetchWeatherForCity("Izmir")
+        singleCityWeatherViewModel.weatherData.observe(viewLifecycleOwner) { weatherData ->
             weatherData?.let {
-                temperatureTextView.text = "${it.main?.temp ?: "N/A"} °C"
-                cityTextView.text = it.name
-
+                binding.izmirTemperatureTextView.text = "${it.main?.temp ?: "N/A"} °C"
+                binding.izmirCityTextView.text = it.name ?: "Unknown City"
             }
         }
+
+        // Fetch forecast data for Izmir
+        forecastViewModel.fetchForecastForCity("Izmir")
+        forecastViewModel.forecastData.observe(viewLifecycleOwner) { forecastList ->
+            forecastList?.let {
+                forecastAdapter.updateData(it.take(5))
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

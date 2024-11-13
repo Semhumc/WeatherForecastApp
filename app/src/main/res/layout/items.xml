@@ -8,9 +8,9 @@
 
     <TextView
         android:id="@+id/temperatureTextView"
-        android:layout_width="157dp"
+        android:layout_width="176dp"
         android:layout_height="56dp"
-        android:layout_marginStart="248dp"
+        android:layout_marginStart="196dp"
         android:layout_marginTop="180dp"
         android:gravity="right|bottom"
         android:text="Temp"
@@ -20,25 +20,15 @@
 
     <TextView
         android:id="@+id/cityTextView"
-        android:layout_width="230dp"
-        android:layout_height="55dp"
+        android:layout_width="181dp"
+        android:layout_height="57dp"
         android:layout_marginTop="180dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:gravity="left"
         android:text="City"
         android:textSize="40sp"
         app:layout_constraintEnd_toStartOf="@+id/temperatureTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
-        android:gravity="left"
-        android:text="Main/"
-        android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+
     <TextView
         android:id="@+id/mainTextView"
         android:layout_width="wrap_content"
@@ -13,109 +14,10 @@
         android:text="Wheather Forcast"
         android:textSize="50sp" />
 
-    <!--<TextView
-        android:id="@+id/istanbulCityTextView"
-        android:layout_width="199dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="150dp"
-        android:gravity="left"
-        android:text="Istanbul"
-        android:textSize="40sp" />
-
-    <TextView
-        android:id="@+id/istanbulTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="120dp"
-        android:gravity="left"
-        android:text="Istanbul/"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/istanbulTemperatureTextView"
-        android:layout_width="205dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="150dp"
-        android:gravity="right|bottom"
-        android:text="Sıcaklık"
-        android:textSize="24sp" />
-
-
-    <TextView
-        android:id="@+id/izmirCityTextView"
-        android:layout_width="199dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="250dp"
-        android:gravity="left"
-        android:text="Izmir"
-        android:textSize="40sp" />
-
-    <TextView
-        android:id="@+id/izmirTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="220dp"
-        android:gravity="left"
-        android:text="Izmir/"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/izmirTemperatureTextView"
-        android:layout_width="205dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="250dp"
-        android:gravity="right|bottom"
-        android:text="Sıcaklık"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/ankaraCityTextView"
-        android:layout_width="199dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="350dp"
-        android:gravity="left"
-        android:text="Ankara"
-        android:textSize="40sp" />
-
-    <TextView
-        android:id="@+id/ankaraTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="320dp"
-        android:gravity="left"
-        android:text="Ankara/"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/ankaraTemperatureTextView"
-        android:layout_width="205dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="350dp"
-        android:gravity="right|bottom"
-        android:text="Sıcaklık"
-        android:textSize="24sp" />-->
-
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/MainRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/items" />
-
-    <LinearLayout
-        android:id="@+id/mainLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp" />
 
 </FrameLayout>
