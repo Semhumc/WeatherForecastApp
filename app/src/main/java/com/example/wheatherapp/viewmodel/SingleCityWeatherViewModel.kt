@@ -8,15 +8,15 @@ import com.example.wheatherapp.model.CurrentWheatherApi
 import com.example.wheatherapp.repository.WheatherRepository
 import kotlinx.coroutines.launch
 
-class WeatherViewModel(private val repository: WheatherRepository) : ViewModel() {
+class SingleCityWeatherViewModel(private val repository: WheatherRepository) : ViewModel() {
 
-    private val _weatherData = MutableLiveData<List<CurrentWheatherApi>>()
-    val weatherData: LiveData<List<CurrentWheatherApi>> get() = _weatherData
+    private val _weatherData = MutableLiveData<CurrentWheatherApi>()
+    val weatherData: LiveData<CurrentWheatherApi> get() = _weatherData
 
-    fun fetchWeatherForCities(cities: List<String>) {
+    fun fetchWeatherForCity(city: String) {
         viewModelScope.launch {
             try {
-                val data = repository.getWeatherForCities(cities)
+                val data = repository.getWeatherForCity(city)
                 _weatherData.postValue(data)
             } catch (e: Exception) {
                 e.printStackTrace()

@@ -17,6 +17,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -56,4 +60,6 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     // ViewPager2
     implementation ("androidx.viewpager2:viewpager2:1.1.0")
+    
+
 }

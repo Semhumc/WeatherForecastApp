@@ -7,31 +7,31 @@ data class CurrentWheatherApi(
     @SerializedName("base")
     val base: String?,
     @SerializedName("clouds")
-    val clouds: Clouds?,
+    val clouds: Clouds?= null,
     @SerializedName("cod")
-    val cod: Int?,
+    val cod: Int?= null,
     @SerializedName("coord")
-    val coord: Coord?,
+    val coord: Coord?= null,
     @SerializedName("dt")
-    val dt: Int?,
+    val dt: Int?= null,
     @SerializedName("id")
-    val id: Int?,
+    val id: Int?= null,
     @SerializedName("main")
-    val main: Main?,
+    val main: Main?= null,
     @SerializedName("name")
-    val name: String?,
+    val name: String?= null,
     @SerializedName("rain")
-    val rain: Rain?,
+    val rain: Rain?= null,
     @SerializedName("sys")
-    val sys: Sys?,
+    val sys: Sys?= null,
     @SerializedName("timezone")
-    val timezone: Int?,
+    val timezone: Int?= null,
     @SerializedName("visibility")
-    val visibility: Int?,
+    val visibility: Int?= null,
     @SerializedName("weather")
-    val weather: List<Weather?>?,
+    val weather: List<Weather?>?= null,
     @SerializedName("wind")
-    val wind: Wind?
+    val wind: Wind?= null
 ) {
     data class Clouds(
         @SerializedName("all")

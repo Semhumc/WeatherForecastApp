@@ -10,11 +10,11 @@ import androidx.fragment.app.viewModels
 import com.example.wheatherapp.R
 import com.example.wheatherapp.data.WheatherApi
 import com.example.wheatherapp.repository.WheatherRepository
-import com.example.wheatherapp.viewmodel.WeatherViewModel
+import com.example.wheatherapp.viewmodel.SingleCityWeatherViewModel
 import com.example.wheatherapp.viewmodel.WheatherViewModelFactory
 
 class IzmirFragment : Fragment() {
-    private val viewModel: WeatherViewModel by viewModels {
+    private val viewModel: SingleCityWeatherViewModel by viewModels {
         WheatherViewModelFactory(WheatherRepository(WheatherApi.getClient()))
     }
 
@@ -34,7 +34,7 @@ class IzmirFragment : Fragment() {
         val cityTextView: TextView = view.findViewById(R.id.izmirCityTextView)
 
 
-        viewModel.loadCurrentWeather(38.4333, 27.15, "metric")
+        viewModel.fetchWeatherForCity("Izmir" )
 
         viewModel.weatherData.observe(viewLifecycleOwner) { weatherData ->
             weatherData?.let {
