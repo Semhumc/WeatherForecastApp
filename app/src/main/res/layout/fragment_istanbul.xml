@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#0001B2D5">
 
 
     <TextView
@@ -11,11 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="Istanbul"
-        android:textSize="40sp"
-         />
+        android:textSize="24sp" />
 
 
     <TextView
@@ -23,17 +23,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="280dp"
         android:gravity="center"
         android:text="Sıcaklık"
         android:textSize="24sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/forecastRecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="409dp"
+        android:layout_gravity="bottom"
+        android:background="#003F3F3F"
         tools:listitem="@layout/forecast_items" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="165dp"
+        android:layout_below="@id/istanbulTemperatureTextView"
+        android:layout_marginTop="100dp" />
 
 
 </FrameLayout>

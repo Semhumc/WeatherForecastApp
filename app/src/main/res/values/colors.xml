@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="sunny_blue">#6488EA</color>
+    <color name="cloudy_yellow">#FFBD3A</color>
+    <color name="rainy_darkblue">#003E6D</color>
+    <color name="clear_purple">#472D6C</color>
+    <color name="fog_green">#08AE88</color>
+    <color name="storm_purple">#726998</color>
 </resources>

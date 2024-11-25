@@ -7,39 +7,73 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.wheatherapp.R
+import com.example.wheatherapp.adapter.ForecastRecyclerViewAdapter
 import com.example.wheatherapp.data.WheatherApi
+import com.example.wheatherapp.databinding.FragmentAnkaraBinding
+import com.example.wheatherapp.databinding.FragmentIstanbulBinding
 import com.example.wheatherapp.repository.WheatherRepository
+import com.example.wheatherapp.viewmodel.ForecastViewModel
 import com.example.wheatherapp.viewmodel.SingleCityWeatherViewModel
 import com.example.wheatherapp.viewmodel.WheatherViewModelFactory
 
 class AnkaraFragment : Fragment() {
-    private val viewModel: SingleCityWeatherViewModel by viewModels {
+
+
+    private var _binding : FragmentAnkaraBinding? = null
+    private val binding get() = _binding!!
+
+    private val singleCityWeatherViewModel: SingleCityWeatherViewModel by viewModels {
         WheatherViewModelFactory(WheatherRepository(WheatherApi.getClient()))
     }
+
+    private val forecastViewModel: ForecastViewModel by viewModels {
+        WheatherViewModelFactory(WheatherRepository(WheatherApi.getClient()))
+    }
+
+    private lateinit var forecastAdapter: ForecastRecyclerViewAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_ankara, container, false)
+    ): View {
+        _binding = FragmentAnkaraBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val temperatureTextView: TextView = view.findViewById(R.id.ankaraTemperatureTextView)
-        val cityTextView: TextView = view.findViewById(R.id.ankaraCityTextView)
+
+        forecastAdapter = ForecastRecyclerViewAdapter(emptyList())
+        binding.forecastRecyclerview.apply {
+            adapter = forecastAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+        }
 
 
-        viewModel.fetchWeatherForCity("Ankara")
-
-        viewModel.weatherData.observe(viewLifecycleOwner) { weatherData ->
+        singleCityWeatherViewModel.fetchWeatherForCity("Ankara")
+        singleCityWeatherViewModel.weatherData.observe(viewLifecycleOwner) { weatherData ->
             weatherData?.let {
-                temperatureTextView.text = "${it.main?.temp ?: "N/A"} °C"
-                cityTextView.text = it.name
+                binding.ankaraTemperatureTextView.text = "${it.main?.temp ?: "N/A"} °C"
+                binding.ankaraCityTextView.text = it.name ?: "Unknown City"
+                val weatherIcon = it.weather.firstOrNull()?.icon
+                val iconUrl = "https://openweathermap.org/img/wn/${weatherIcon}@2x.png" // Use @2x for better resolution
+                Glide.with(this)
+                    .load(iconUrl)
+                    .into(binding.imageView)
+            }
+        }
 
+
+        forecastViewModel.fetchForecastForCity("Ankara")
+        forecastViewModel.forecastData.observe(viewLifecycleOwner) { forecastList ->
+            forecastList?.let {
+                forecastAdapter.updateData(it.take(5))
             }
         }
     }

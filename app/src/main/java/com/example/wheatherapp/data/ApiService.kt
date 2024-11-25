@@ -14,10 +14,15 @@ interface ApiService {
         @Query("appid") apiKey: String
     ): CurrentWheatherApi
 
+
+
+
     @GET("data/2.5/forecast")
     suspend fun getForecast(
         @Query("q") city:String,
         @Query("units") units: String,
         @Query("appid") apiKey: String
     ):ForecastWheatherApi
+
+
 }

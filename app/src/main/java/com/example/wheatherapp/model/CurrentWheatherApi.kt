@@ -29,7 +29,7 @@ data class CurrentWheatherApi(
     @SerializedName("visibility")
     val visibility: Int?= null,
     @SerializedName("weather")
-    val weather: List<Weather?>?= null,
+    val weather: List<Weather?>,
     @SerializedName("wind")
     val wind: Wind?= null
 ) {
@@ -101,4 +101,6 @@ data class CurrentWheatherApi(
         @SerializedName("speed")
         val speed: Double?
     )
+
+
 }

@@ -37,14 +37,12 @@ class MainFragment : Fragment() {
 
         val cities = listOf("Istanbul", "Ankara", "Izmir")
 
-        // Set up RecyclerView
         recyclerViewAdapter = RecyclerViewAdapter(emptyList())
         binding.MainRecyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = recyclerViewAdapter
         }
 
-        // Observe weather data
         viewModel.weatherData.observe(viewLifecycleOwner) { weatherList ->
             recyclerViewAdapter.updateData(weatherList)
         }

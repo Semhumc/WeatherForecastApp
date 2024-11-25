@@ -1,40 +1,37 @@
 package com.example.wheatherapp.adapter
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wheatherapp.databinding.ItemsBinding
+import com.example.wheatherapp.databinding.ForecastItemsBinding
 import com.example.wheatherapp.model.ForecastWheatherApi
 
-class ForecastRecyclerViewAdapter (private var forecastList: List<ForecastWheatherApi.Item0>) :
-    RecyclerView.Adapter<ForecastRecyclerViewAdapter.ForecastViewHolder>(){
+class ForecastRecyclerViewAdapter(
+    private var data: List<ForecastWheatherApi.Item0>
+) : RecyclerView.Adapter<ForecastRecyclerViewAdapter.ForecastViewHolder>() {
 
-    class ForecastViewHolder(private val binding: ItemsBinding) :
+    class ForecastViewHolder(private val binding: ForecastItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ForecastWheatherApi.Item0) {
-
-            binding.cityTextView.text = item.dtTxt ?: "Unknown Date"
-
-            binding.temperatureTextView.text = "${item.main?.temp ?: "N/A"} °C"
-
+            binding.dateTextView.text = item.dtTxt ?: "N/A"
+            binding.temperatureTextView.text = "${item.main?.temp ?: "N/A"}°C"
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
-        val binding = ItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ForecastItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ForecastViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        holder.bind(forecastList[position])
+        holder.bind(data[position])
     }
 
-    override fun getItemCount(): Int = forecastList.size
+    override fun getItemCount(): Int = data.size
 
-    fun updateData(newForecastList: List<ForecastWheatherApi.Item0>) {
-        forecastList = newForecastList
+    fun updateData(newData: List<ForecastWheatherApi.Item0>) {
+        data = newData
         notifyDataSetChanged()
     }
 }

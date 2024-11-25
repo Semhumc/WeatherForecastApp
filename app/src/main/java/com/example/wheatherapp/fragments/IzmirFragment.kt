@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.wheatherapp.adapter.ForecastRecyclerViewAdapter
 import com.example.wheatherapp.data.WheatherApi
 import com.example.wheatherapp.databinding.FragmentIzmirBinding
@@ -41,23 +42,30 @@ class IzmirFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // RecyclerView setup
+
         forecastAdapter = ForecastRecyclerViewAdapter(emptyList())
         binding.forecastRecyclerview.apply {
             adapter = forecastAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
         }
 
-        // Fetch current weather data for Izmir
+
         singleCityWeatherViewModel.fetchWeatherForCity("Izmir")
         singleCityWeatherViewModel.weatherData.observe(viewLifecycleOwner) { weatherData ->
             weatherData?.let {
                 binding.izmirTemperatureTextView.text = "${it.main?.temp ?: "N/A"} °C"
                 binding.izmirCityTextView.text = it.name ?: "Unknown City"
+
+                val weatherIcon = it.weather.firstOrNull()?.icon
+                val iconUrl = "https://openweathermap.org/img/wn/${weatherIcon}@2x.png" // Use @2x for better resolution
+                Glide.with(this)
+                    .load(iconUrl)
+                    .into(binding.imageView)
             }
         }
 
-        // Fetch forecast data for Izmir
+
         forecastViewModel.fetchForecastForCity("Izmir")
         forecastViewModel.forecastData.observe(viewLifecycleOwner) { forecastList ->
             forecastList?.let {
