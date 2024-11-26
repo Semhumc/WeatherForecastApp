@@ -1,5 +1,6 @@
 package com.example.wheatherapp.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -61,11 +62,18 @@ class AnkaraFragment : Fragment() {
             weatherData?.let {
                 binding.ankaraTemperatureTextView.text = "${it.main?.temp ?: "N/A"} °C"
                 binding.ankaraCityTextView.text = it.name ?: "Unknown City"
+
+
                 val weatherIcon = it.weather.firstOrNull()?.icon
                 val iconUrl = "https://openweathermap.org/img/wn/${weatherIcon}@2x.png" // Use @2x for better resolution
                 Glide.with(this)
                     .load(iconUrl)
                     .into(binding.imageView)
+
+
+                val condition = it.weather.firstOrNull()?.description ?: ""
+                val backgroundColor = changeImagsAccordingToWeaterCondition(condition)
+                binding.root.setBackgroundColor(backgroundColor)
             }
         }
 
@@ -75,6 +83,39 @@ class AnkaraFragment : Fragment() {
             forecastList?.let {
                 forecastAdapter.updateData(it.take(5))
             }
+        }
+    }
+
+    private fun changeImagsAccordingToWeaterCondition(condition: String) : Int {
+        return when (condition.lowercase()) {
+            "rain", "shower rain" -> {
+                Color.parseColor("#003E6D")
+            }
+
+            "thunderstorm" -> {
+                Color.parseColor("#726998")
+
+            }
+
+            "mist" -> {
+                Color.parseColor("#08AE88")
+
+            }
+
+            "snow" -> {
+                Color.parseColor("#696969")
+            }
+
+            "broken clouds", "scattered clouds", "few clouds" -> {
+                Color.parseColor("#FFBD3A")
+            }
+
+            "clear sky" -> {
+                Color.parseColor("#6488EA")
+            }
+
+            else -> Color.WHITE
+
         }
     }
 }
