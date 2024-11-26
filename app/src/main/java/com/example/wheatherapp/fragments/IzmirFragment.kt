@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.wheatherapp.R
 import com.example.wheatherapp.adapter.ForecastRecyclerViewAdapter
 import com.example.wheatherapp.data.WheatherApi
 import com.example.wheatherapp.databinding.FragmentIzmirBinding
@@ -58,16 +59,12 @@ class IzmirFragment : Fragment() {
                 binding.izmirTemperatureTextView.text = "${it.main?.temp ?: "N/A"} °C"
                 binding.izmirCityTextView.text = it.name ?: "Unknown City"
 
-                val weatherIcon = it.weather.firstOrNull()?.icon
-                val iconUrl = "https://openweathermap.org/img/wn/${weatherIcon}@2x.png" // Use @2x for better resolution
-                Glide.with(this)
-                    .load(iconUrl)
-                    .into(binding.imageView)
-
 
                 val condition = it.weather.firstOrNull()?.description ?: ""
-                val backgroundColor = changeImagsAccordingToWeaterCondition(condition)
+                val backgroundColor = changeBgColorAccordingToWeatherCondition(condition)
                 binding.root.setBackgroundColor(backgroundColor)
+
+                changeIconAccordingToWeatherCondition(condition)
 
             }
         }
@@ -81,10 +78,10 @@ class IzmirFragment : Fragment() {
         }
     }
 
-    private fun changeImagsAccordingToWeaterCondition(condition: String) : Int{
+    private fun changeBgColorAccordingToWeatherCondition(condition: String): Int {
         return when (condition.lowercase()) {
-            "rain","shower rain" -> {
-                Color.parseColor("#003E6D")
+            "rain", "shower rain" -> {
+                Color.parseColor("#2D3E73")
             }
 
             "thunderstorm" -> {
@@ -98,23 +95,59 @@ class IzmirFragment : Fragment() {
             }
 
             "snow" -> {
-                Color.parseColor("#696969")
+                Color.parseColor("#60AFD7")
             }
 
-            "broken clouds" ,"scattered clouds","few clouds"-> {
-                Color.parseColor("#FFBD3A")
+            "broken clouds", "scattered clouds", "few clouds" -> {
+                Color.parseColor("#FF9D12")
             }
 
             "clear sky" -> {
-                Color.parseColor("#6488EA")
+                Color.parseColor("#00C0E7")
             }
+
             else -> Color.WHITE
 
         }
+
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun changeIconAccordingToWeatherCondition(condition: String) {
+        when (condition.lowercase()) {
+            "rain", "shower rain" -> {
+                binding.izmirImageView.setImageResource(R.drawable._rainy)
+
+            }
+
+            "thunderstorm" -> {
+                binding.izmirImageView.setImageResource(R.drawable._storm)
+
+            }
+
+            "mist" -> {
+                binding.izmirImageView.setImageResource(R.drawable._fog)
+
+            }
+
+            "snow" -> {
+                binding.izmirImageView.setImageResource(R.drawable._snowy)
+            }
+
+            "broken clouds", "scattered clouds", "few clouds" -> {
+                binding.izmirImageView.setImageResource(R.drawable._cloudy)
+            }
+
+            "clear sky" -> {
+                binding.izmirImageView.setImageResource(R.drawable._sunny)
+            }
+
+            else -> {
+                binding.izmirImageView.setImageResource(R.drawable._clear)
+            }
+
+        }
+
+
     }
 }

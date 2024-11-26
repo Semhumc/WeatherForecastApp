@@ -23,7 +23,7 @@ import com.example.wheatherapp.viewmodel.WheatherViewModelFactory
 class AnkaraFragment : Fragment() {
 
 
-    private var _binding : FragmentAnkaraBinding? = null
+    private var _binding: FragmentAnkaraBinding? = null
     private val binding get() = _binding!!
 
     private val singleCityWeatherViewModel: SingleCityWeatherViewModel by viewModels {
@@ -64,16 +64,12 @@ class AnkaraFragment : Fragment() {
                 binding.ankaraCityTextView.text = it.name ?: "Unknown City"
 
 
-                val weatherIcon = it.weather.firstOrNull()?.icon
-                val iconUrl = "https://openweathermap.org/img/wn/${weatherIcon}@2x.png" // Use @2x for better resolution
-                Glide.with(this)
-                    .load(iconUrl)
-                    .into(binding.imageView)
-
 
                 val condition = it.weather.firstOrNull()?.description ?: ""
-                val backgroundColor = changeImagsAccordingToWeaterCondition(condition)
+                val backgroundColor = changeBgColorAccordingToWeatherCondition(condition)
                 binding.root.setBackgroundColor(backgroundColor)
+
+               changeIconAccordingToWeatherCondition(condition)
             }
         }
 
@@ -86,10 +82,10 @@ class AnkaraFragment : Fragment() {
         }
     }
 
-    private fun changeImagsAccordingToWeaterCondition(condition: String) : Int {
+    private fun changeBgColorAccordingToWeatherCondition(condition: String): Int {
         return when (condition.lowercase()) {
             "rain", "shower rain" -> {
-                Color.parseColor("#003E6D")
+                Color.parseColor("#2D3E73")
             }
 
             "thunderstorm" -> {
@@ -103,19 +99,61 @@ class AnkaraFragment : Fragment() {
             }
 
             "snow" -> {
-                Color.parseColor("#696969")
+                Color.parseColor("#60AFD7")
             }
 
             "broken clouds", "scattered clouds", "few clouds" -> {
-                Color.parseColor("#FFBD3A")
+                Color.parseColor("#FF9D12")
             }
 
             "clear sky" -> {
-                Color.parseColor("#6488EA")
+                Color.parseColor("#00C0E7")
             }
 
             else -> Color.WHITE
 
         }
+
+
     }
+
+    private fun changeIconAccordingToWeatherCondition(condition: String) {
+         when (condition.lowercase()) {
+            "rain", "shower rain" -> {
+                binding.ankaraImageView.setImageResource(R.drawable._rainy)
+            }
+
+            "thunderstorm" -> {
+                binding.ankaraImageView.setImageResource(R.drawable._storm)
+
+            }
+
+            "mist" -> {
+                binding.ankaraImageView.setImageResource(R.drawable._fog)
+
+            }
+
+            "snow" -> {
+                binding.ankaraImageView.setImageResource(R.drawable._snowy)
+            }
+
+            "broken clouds", "scattered clouds", "few clouds" -> {
+                binding.ankaraImageView.setImageResource(R.drawable._cloudy)
+            }
+
+            "clear sky" -> {
+                binding.ankaraImageView.setImageResource(R.drawable._sunny)
+            }
+
+            else ->{
+                binding.ankaraImageView.setImageResource(R.drawable._clear)
+            }
+
+        }
+
+
+
+    }
+
+
 }

@@ -11,7 +11,9 @@
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="Ankara "
-        android:textSize="24sp" />
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
 
 
@@ -23,7 +25,9 @@
         android:layout_marginTop="280dp"
         android:gravity="center"
         android:text="Sıcaklık"
-        android:textSize="24sp" />
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/forecastRecyclerview"
@@ -34,9 +38,9 @@
         tools:listitem="@layout/forecast_items" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ankaraImageView"
         android:layout_width="match_parent"
-        android:layout_height="165dp"
+        android:layout_height="180dp"
         android:layout_below="@id/ankaraTemperatureTextView"
         android:layout_marginTop="100dp" />
 
