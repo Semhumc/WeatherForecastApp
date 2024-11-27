@@ -5,16 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.wheatherapp.R
 import com.example.wheatherapp.adapter.ForecastRecyclerViewAdapter
 import com.example.wheatherapp.data.WheatherApi
 import com.example.wheatherapp.databinding.FragmentAnkaraBinding
-import com.example.wheatherapp.databinding.FragmentIstanbulBinding
 import com.example.wheatherapp.repository.WheatherRepository
 import com.example.wheatherapp.viewmodel.ForecastViewModel
 import com.example.wheatherapp.viewmodel.SingleCityWeatherViewModel
@@ -60,10 +57,15 @@ class AnkaraFragment : Fragment() {
         singleCityWeatherViewModel.fetchWeatherForCity("Ankara")
         singleCityWeatherViewModel.weatherData.observe(viewLifecycleOwner) { weatherData ->
             weatherData?.let {
-                binding.ankaraTemperatureTextView.text = "${it.main?.temp ?: "N/A"} °C"
+                val temperature = it.main?.temp ?: "N/A"
+                binding.ankaraTemperatureTextView.text = if (temperature is Double) {
+                    String.format("%.1f°C", temperature)
+                } else {
+                    "$temperature°C"
+                }
                 binding.ankaraCityTextView.text = it.name ?: "Unknown City"
 
-
+                binding.ankaraDescTextView.text = it.weather.firstOrNull()?.description ?: ""
 
                 val condition = it.weather.firstOrNull()?.description ?: ""
                 val backgroundColor = changeBgColorAccordingToWeatherCondition(condition)

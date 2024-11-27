@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.wheatherapp.R
 import com.example.wheatherapp.adapter.ForecastRecyclerViewAdapter
 import com.example.wheatherapp.data.WheatherApi
@@ -56,8 +55,15 @@ class IzmirFragment : Fragment() {
         singleCityWeatherViewModel.fetchWeatherForCity("Izmir")
         singleCityWeatherViewModel.weatherData.observe(viewLifecycleOwner) { weatherData ->
             weatherData?.let {
-                binding.izmirTemperatureTextView.text = "${it.main?.temp ?: "N/A"} °C"
+                val temperature = it.main?.temp ?: "N/A"
+                binding.izmirTemperatureTextView.text = if (temperature is Double) {
+                    String.format("%.1f°C", temperature)
+                } else {
+                    "$temperature°C"
+                }
                 binding.izmirCityTextView.text = it.name ?: "Unknown City"
+
+                binding.izmirDescTextView.text= it.weather.firstOrNull()?.description?:""
 
 
                 val condition = it.weather.firstOrNull()?.description ?: ""

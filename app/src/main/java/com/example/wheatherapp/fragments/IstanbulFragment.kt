@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.wheatherapp.R
 import com.example.wheatherapp.adapter.ForecastRecyclerViewAdapter
 import com.example.wheatherapp.data.WheatherApi
@@ -43,7 +42,6 @@ class IstanbulFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,12 +52,18 @@ class IstanbulFragment : Fragment() {
             setHasFixedSize(true)
         }
 
-
         singleCityWeatherViewModel.fetchWeatherForCity("Istanbul")
         singleCityWeatherViewModel.weatherData.observe(viewLifecycleOwner) { weatherData ->
             weatherData?.let {
-                binding.istanbulTemperatureTextView.text = "${it.main?.temp ?: "N/A"} °C"
+                val temperature = it.main?.temp ?: "N/A"
+                binding.istanbulTemperatureTextView.text = if (temperature is Double) {
+                    String.format("%.1f°C", temperature)
+                } else {
+                    "$temperature°C"
+                }
                 binding.istanbulCityTextView.text = it.name ?: "Unknown City"
+
+                binding.istanbulDescTextView.text = it.weather.firstOrNull()?.description ?: ""
 
 
                 val condition = it.weather.firstOrNull()?.description ?: ""
@@ -69,7 +73,6 @@ class IstanbulFragment : Fragment() {
                 changeIconAccordingToWeatherCondition(condition)
             }
         }
-
 
         forecastViewModel.fetchForecastForCity("Istanbul")
         forecastViewModel.forecastData.observe(viewLifecycleOwner) { forecastList ->
@@ -110,8 +113,6 @@ class IstanbulFragment : Fragment() {
             else -> Color.WHITE
 
         }
-
-
     }
 
     private fun changeIconAccordingToWeatherCondition(condition: String) {
@@ -145,9 +146,6 @@ class IstanbulFragment : Fragment() {
             else -> {
                 binding.istanbulImageView.setImageResource(R.drawable._clear)
             }
-
         }
-
-
     }
 }

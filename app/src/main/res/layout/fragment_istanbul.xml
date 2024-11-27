@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0001B2D5">
-
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/istanbulCityTextView"
@@ -14,38 +11,44 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="Istanbul"
+        android:text="Izmir"
         android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="30sp" />
 
+    <ImageView
+        android:id="@+id/istanbulImageView"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_marginTop="100dp" />
 
     <TextView
         android:id="@+id/istanbulTemperatureTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="280dp"
-        android:gravity="center"
+        android:layout_marginTop="320dp"
+        android:gravity="center|bottom"
         android:text="Sıcaklık"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="45sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/istanbulDescTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="275dp"
+        android:layout_marginTop="350dp"
+        android:text="Desc"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="italic" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/forecastRecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="409dp"
+        android:layout_height="448dp"
         android:layout_gravity="bottom"
         android:background="#003F3F3F"
         tools:listitem="@layout/forecast_items" />
-
-    <ImageView
-        android:id="@+id/istanbulImageView"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_below="@id/istanbulTemperatureTextView"
-        android:layout_marginTop="100dp" />
-
-
 </FrameLayout>
