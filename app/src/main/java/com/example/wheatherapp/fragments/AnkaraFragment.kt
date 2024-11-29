@@ -79,7 +79,7 @@ class AnkaraFragment : Fragment() {
         forecastViewModel.fetchForecastForCity("Ankara")
         forecastViewModel.forecastData.observe(viewLifecycleOwner) { forecastList ->
             forecastList?.let {
-                forecastAdapter.updateData(it.take(5))
+                forecastAdapter.updateData(it.take(5))    //forecastAdapter.updateData(it.drop(1).take(5))
             }
         }
     }

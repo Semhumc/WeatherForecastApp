@@ -1,5 +1,6 @@
 package com.example.wheatherapp.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,8 @@ class MainFragment : Fragment() {
 
         val cities = listOf("Istanbul", "Ankara", "Izmir")
 
+
+
         recyclerViewAdapter = RecyclerViewAdapter(emptyList())
         binding.MainRecyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -48,6 +51,43 @@ class MainFragment : Fragment() {
         }
 
         viewModel.fetchWeatherForCities(cities)
+
+
+    }
+
+    private fun changeBgColorAccordingToWeatherCondition(condition: String): Int {
+        return when (condition.lowercase()) {
+            "rain", "shower rain" -> {
+                Color.parseColor("#2D3E73")
+            }
+
+            "thunderstorm" -> {
+                Color.parseColor("#726998")
+
+            }
+
+            "mist" -> {
+                Color.parseColor("#08AE88")
+
+            }
+
+            "snow" -> {
+                Color.parseColor("#60AFD7")
+            }
+
+            "broken clouds", "scattered clouds", "few clouds" -> {
+                Color.parseColor("#FF9D12")
+            }
+
+            "clear sky" -> {
+                Color.parseColor("#00C0E7")
+            }
+
+            else -> Color.WHITE
+
+        }
+
+
     }
 
     override fun onDestroyView() {
