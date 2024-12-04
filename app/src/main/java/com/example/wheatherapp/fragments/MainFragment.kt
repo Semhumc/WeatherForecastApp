@@ -37,7 +37,7 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
 
-        val navController = NavHostFragment.findNavController(this)
+       // val navController = NavHostFragment.findNavController(this)
 
 
     }
@@ -47,6 +47,7 @@ class MainFragment : Fragment() {
 
 
         val cities = listOf("Istanbul", "Ankara", "Izmir")
+
         recyclerViewAdapter = RecyclerViewAdapter(emptyList()) { cityName ->
             when (cityName) {
                 "Istanbul" -> findNavController().navigate(R.id.action_mainFragment_to_istanbulFragment)
@@ -54,7 +55,6 @@ class MainFragment : Fragment() {
                 "Izmir" -> findNavController().navigate(R.id.action_mainFragment_to_izmirFragment)
             }
         }
-
 
         binding.mainRecyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())

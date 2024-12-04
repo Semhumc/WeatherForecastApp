@@ -42,7 +42,7 @@ class IstanbulFragment : Fragment() {
         _binding = FragmentIstanbulBinding.inflate(inflater, container, false)
         return binding.root
 
-        val navController = NavHostFragment.findNavController(this)
+        //val navController = NavHostFragment.findNavController(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

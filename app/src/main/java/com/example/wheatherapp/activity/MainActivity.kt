@@ -17,10 +17,15 @@ import com.example.wheatherapp.fragments.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController: NavController
+    //private lateinit var navController: NavController
 
     private lateinit var binding: ActivityMainBinding
 
+    private val navController by lazy {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navHostFragment.navController
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +46,10 @@ class MainActivity : AppCompatActivity() {
        //val adapter = ViewPagerAdapter(this, fragments)
        //viewPager2.adapter = adapter
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-
+        //val navHostFragment =
+        //    supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        //navController = navHostFragment.navController
+//
        //val window = getWindow()
        //window.setFlags(
        //    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
