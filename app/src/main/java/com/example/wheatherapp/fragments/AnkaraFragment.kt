@@ -7,8 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wheatherapp.R
+import com.example.wheatherapp.activity.MainActivity
 import com.example.wheatherapp.adapter.ForecastRecyclerViewAdapter
 import com.example.wheatherapp.data.WheatherApi
 import com.example.wheatherapp.databinding.FragmentAnkaraBinding
@@ -18,7 +22,6 @@ import com.example.wheatherapp.viewmodel.SingleCityWeatherViewModel
 import com.example.wheatherapp.viewmodel.WheatherViewModelFactory
 
 class AnkaraFragment : Fragment() {
-
 
     private var _binding: FragmentAnkaraBinding? = null
     private val binding get() = _binding!!
@@ -40,10 +43,13 @@ class AnkaraFragment : Fragment() {
     ): View {
         _binding = FragmentAnkaraBinding.inflate(inflater, container, false)
         return binding.root
+
+        val navController = NavHostFragment.findNavController(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
 
         forecastAdapter = ForecastRecyclerViewAdapter(emptyList())
@@ -71,7 +77,7 @@ class AnkaraFragment : Fragment() {
                 val backgroundColor = changeBgColorAccordingToWeatherCondition(condition)
                 binding.root.setBackgroundColor(backgroundColor)
 
-               changeIconAccordingToWeatherCondition(condition)
+                changeIconAccordingToWeatherCondition(condition)
             }
         }
 
@@ -120,7 +126,7 @@ class AnkaraFragment : Fragment() {
     }
 
     private fun changeIconAccordingToWeatherCondition(condition: String) {
-         when (condition.lowercase()) {
+        when (condition.lowercase()) {
             "rain", "shower rain" -> {
                 binding.ankaraImageView.setImageResource(R.drawable._rainy)
             }
@@ -147,12 +153,11 @@ class AnkaraFragment : Fragment() {
                 binding.ankaraImageView.setImageResource(R.drawable._sunny)
             }
 
-            else ->{
+            else -> {
                 binding.ankaraImageView.setImageResource(R.drawable._clear)
             }
 
         }
-
 
 
     }

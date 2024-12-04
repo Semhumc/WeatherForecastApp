@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.wheatherapp.fragments.MainFragment"
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_izmirFragment"
+            app:destination="@id/izmirFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_istanbulFragment"
+            app:destination="@id/istanbulFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ankaraFragment"
+            app:destination="@id/ankaraFragment" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/ankaraFragment"
+        android:name="com.example.wheatherapp.fragments.AnkaraFragment"
+        android:label="AnkaraFragment" />
+    <fragment
+        android:id="@+id/izmirFragment"
+        android:name="com.example.wheatherapp.fragments.IzmirFragment"
+        android:label="IzmirFragment" />
+    <fragment
+        android:id="@+id/istanbulFragment"
+        android:name="com.example.wheatherapp.fragments.IstanbulFragment"
+        android:label="IstanbulFragment" />
+</navigation>

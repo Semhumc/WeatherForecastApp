@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wheatherapp.R
+import com.example.wheatherapp.activity.MainActivity
 import com.example.wheatherapp.adapter.ForecastRecyclerViewAdapter
 import com.example.wheatherapp.data.WheatherApi
 import com.example.wheatherapp.databinding.FragmentIstanbulBinding
@@ -18,7 +21,6 @@ import com.example.wheatherapp.viewmodel.SingleCityWeatherViewModel
 import com.example.wheatherapp.viewmodel.WheatherViewModelFactory
 
 class IstanbulFragment : Fragment() {
-
 
     private var _binding: FragmentIstanbulBinding? = null
     private val binding get() = _binding!!
@@ -35,11 +37,12 @@ class IstanbulFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentIstanbulBinding.inflate(inflater, container, false)
         return binding.root
+
+        val navController = NavHostFragment.findNavController(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

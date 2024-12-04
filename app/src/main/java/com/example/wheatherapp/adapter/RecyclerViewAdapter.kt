@@ -8,14 +8,16 @@ import com.example.wheatherapp.R
 import com.example.wheatherapp.databinding.ItemsBinding
 import com.example.wheatherapp.model.CurrentWheatherApi
 
+
 class RecyclerViewAdapter(
-    private var data: List<CurrentWheatherApi>
+    private var data: List<CurrentWheatherApi>,
+    private var onCardClick: (String) -> Unit
 ) : RecyclerView.Adapter<RecyclerViewAdapter.WeatherViewHolder>() {
 
     class WeatherViewHolder(private val binding: ItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: CurrentWheatherApi) {
+        fun bind(item: CurrentWheatherApi,onCardClick: (String) -> Unit) {
             binding.mainCityTextView.text = item.name ?: "Unknown City"
             binding.mainTemperatureTextView.text = "${item.main?.temp ?: "N/A"}°C"
 
@@ -25,14 +27,21 @@ class RecyclerViewAdapter(
             val condition = item.weather?.firstOrNull()?.description ?: ""
             changeIconAccordingToWeatherCondition(condition)
 
+
             val cardViewBgColor = changeBgColorAccordingToWeatherCondition(condition)
             binding.cardView.setCardBackgroundColor(cardViewBgColor)
+
+            binding.cardView.setOnClickListener{
+                item.name?.let { cityName  ->
+                    onCardClick(cityName)
+                }
+            }
 
         }
 
         private fun changeIconAccordingToWeatherCondition(condition: String) {
             when (condition.lowercase()) {
-                "rain", "shower rain","light rain" -> {
+                "rain", "shower rain", "light rain" -> {
                     binding.mainImageView.setImageResource(R.drawable._rainy)
 
                 }
@@ -51,7 +60,7 @@ class RecyclerViewAdapter(
                     binding.mainImageView.setImageResource(R.drawable._snowy)
                 }
 
-                "broken clouds", "scattered clouds", "few clouds","overcast clouds" -> {
+                "broken clouds", "scattered clouds", "few clouds", "overcast clouds" -> {
                     binding.mainImageView.setImageResource(R.drawable._cloudy)
                 }
 
@@ -67,6 +76,7 @@ class RecyclerViewAdapter(
 
 
         }
+
         private fun changeBgColorAccordingToWeatherCondition(condition: String): Int {
             return when (condition.lowercase()) {
                 "rain", "shower rain" -> {
@@ -109,8 +119,9 @@ class RecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position],onCardClick)
     }
+
 
     override fun getItemCount(): Int = data.size
 

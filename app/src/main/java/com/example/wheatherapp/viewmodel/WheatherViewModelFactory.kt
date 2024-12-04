@@ -13,9 +13,11 @@ class WheatherViewModelFactory(
             modelClass.isAssignableFrom(WeatherViewModel::class.java) -> {
                 WeatherViewModel(repository) as T
             }
+
             modelClass.isAssignableFrom(SingleCityWeatherViewModel::class.java) -> {
                 SingleCityWeatherViewModel(repository) as T
             }
+
             modelClass.isAssignableFrom(ForecastViewModel::class.java) -> {
                 ForecastViewModel(repository) as T
             }

@@ -9,7 +9,7 @@ import com.example.wheatherapp.model.ForecastWheatherApi
 import com.example.wheatherapp.repository.WheatherRepository
 import kotlinx.coroutines.launch
 
-class ForecastViewModel(private val repository: WheatherRepository) : ViewModel(){
+class ForecastViewModel(private val repository: WheatherRepository) : ViewModel() {
 
     private val _forecastData = MutableLiveData<List<ForecastWheatherApi.Item0>>()
     val forecastData: LiveData<List<ForecastWheatherApi.Item0>> get() = _forecastData
@@ -18,11 +18,9 @@ class ForecastViewModel(private val repository: WheatherRepository) : ViewModel(
         viewModelScope.launch {
             try {
                 val forecast = repository.getWeatherForecast(city)
-                val dailyForecast = forecast.list
-                    ?.filterNotNull()
-                    ?.filterIndexed { index, _ ->
-                        index % 8 == 0
-                    } ?: emptyList()
+                val dailyForecast = forecast.list?.filterNotNull()?.filterIndexed { index, _ ->
+                    index % 8 == 0
+                } ?: emptyList()
 
                 _forecastData.postValue(dailyForecast)
             } catch (e: Exception) {

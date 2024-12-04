@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#4D5C6E">
 
 
-    <TextView
-        android:id="@+id/mainTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Wheather Forcast"
-        android:textSize="50sp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/MainRecyclerview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="599dp"
-        android:layout_gravity="bottom"
-        tools:listitem="@layout/items" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/mainTextView"
+            android:layout_width="251dp"
+            android:layout_height="142dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="25dp"
+            android:text="Wheather Forcast"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mainRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:background="#003F3F3F"
+            tools:listitem="@layout/items" />
+
+
+
+    </LinearLayout>
+
+
 
 
 </FrameLayout>

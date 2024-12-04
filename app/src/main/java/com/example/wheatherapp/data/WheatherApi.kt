@@ -14,18 +14,19 @@ object WheatherApi {
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(60, TimeUnit.SECONDS)
-        .readTimeout(60,TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
         .writeTimeout(60, TimeUnit.SECONDS)
         .build()
 
-    private val retrofit : Retrofit by lazy {
-             Retrofit.Builder()
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-    fun getClient(): ApiService{
+
+    fun getClient(): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 

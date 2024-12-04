@@ -9,4 +9,5 @@
     <color name="fog_green">#08AE88</color>
     <color name="storm_purple">#726998</color>
     <color name="dark_grey">#696969</color>
+    <color name="transparent">#00696969</color>
 </resources>

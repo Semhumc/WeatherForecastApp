@@ -1,4 +1,3 @@
-
 package com.example.wheatherapp.repository
 
 import com.example.wheatherapp.data.ApiService
@@ -11,7 +10,7 @@ class WheatherRepository(private val api: ApiService) {
     suspend fun getWeatherForCities(cities: List<String>): List<CurrentWheatherApi> {
 
         return cities.map { city ->
-            api.getCurrentWeather(city,"metric", apiKey)
+            api.getCurrentWeather(city, "metric", apiKey)
         }
     }
 
@@ -19,7 +18,7 @@ class WheatherRepository(private val api: ApiService) {
         return api.getCurrentWeather(city, "metric", apiKey)
     }
 
-    suspend fun getWeatherForecast(city:String) : ForecastWheatherApi{
-        return api.getForecast(city,"metric",apiKey)
+    suspend fun getWeatherForecast(city: String): ForecastWheatherApi {
+        return api.getForecast(city, "metric", apiKey)
     }
 }

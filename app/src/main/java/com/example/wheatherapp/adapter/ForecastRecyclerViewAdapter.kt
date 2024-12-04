@@ -20,7 +20,8 @@ class ForecastRecyclerViewAdapter(
 
         fun bind(item: ForecastWheatherApi.Item0) {
 
-            val formattedDate = item.dtTxt?.convertDateToWeekNameYear(DateFormats.DEFAULT_FORMAT.format) ?: "N/A"
+            val formattedDate =
+                item.dtTxt?.convertDateToWeekNameYear(DateFormats.DEFAULT_FORMAT.format) ?: "N/A"
 
             binding.dateTextView.text = formattedDate
             binding.temperatureTextView.text = item.main?.temp?.let {
@@ -36,7 +37,7 @@ class ForecastRecyclerViewAdapter(
 
         private fun changeIconAccordingToWeatherCondition(condition: String) {
             when (condition.lowercase()) {
-                "rain", "shower rain","light rain" -> {
+                "rain", "shower rain", "light rain" -> {
                     binding.forcastImageView.setImageResource(R.drawable._rainy)
 
                 }
@@ -55,7 +56,7 @@ class ForecastRecyclerViewAdapter(
                     binding.forcastImageView.setImageResource(R.drawable._snowy)
                 }
 
-                "broken clouds", "scattered clouds", "few clouds","overcast clouds" -> {
+                "broken clouds", "scattered clouds", "few clouds", "overcast clouds" -> {
                     binding.forcastImageView.setImageResource(R.drawable._cloudy)
                 }
 
@@ -74,7 +75,8 @@ class ForecastRecyclerViewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
-        val binding = ForecastItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ForecastItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ForecastViewHolder(binding)
     }
 
