@@ -12,31 +12,32 @@
         android:label="MainFragment"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_izmirFragment"
-            app:destination="@id/izmirFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_istanbulFragment"
             app:destination="@id/istanbulFragment" />
+
         <action
             android:id="@+id/action_mainFragment_to_ankaraFragment"
             app:destination="@id/ankaraFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_izmirFragment"
+            app:destination="@id/izmirFragment" />
+
     </fragment>
 
-
-
-    <fragment
-        android:id="@+id/ankaraFragment"
-        android:name="com.example.wheatherapp.fragments.AnkaraFragment"
-        android:label="AnkaraFragment"
-        tools:layout="@layout/fragment_ankara"/>
     <fragment
         android:id="@+id/izmirFragment"
         android:name="com.example.wheatherapp.fragments.IzmirFragment"
         android:label="IzmirFragment"
-        tools:layout="@layout/fragment_izmir"/>
+        tools:layout="@layout/fragment_izmir" />
     <fragment
         android:id="@+id/istanbulFragment"
         android:name="com.example.wheatherapp.fragments.IstanbulFragment"
         android:label="IstanbulFragment"
-        tools:layout="@layout/fragment_istanbul"/>
+        tools:layout="@layout/fragment_istanbul" />
+    <fragment
+        android:id="@+id/ankaraFragment"
+        android:name="com.example.wheatherapp.fragments.AnkaraFragment"
+        android:label="AnkaraFragment"
+        tools:layout="@layout/fragment_ankara" />
 </navigation>

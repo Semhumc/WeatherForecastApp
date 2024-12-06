@@ -37,7 +37,7 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
 
-       // val navController = NavHostFragment.findNavController(this)
+        // val navController = NavHostFragment.findNavController(this)
 
 
     }
@@ -68,8 +68,4 @@ class MainFragment : Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

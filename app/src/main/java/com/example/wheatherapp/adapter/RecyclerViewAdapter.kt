@@ -28,10 +28,10 @@ class RecyclerViewAdapter(
             changeIconAccordingToWeatherCondition(condition)
 
 
-            val cardViewBgColor = changeBgColorAccordingToWeatherCondition(condition)
-            binding.cardView.setCardBackgroundColor(cardViewBgColor)
+            val bgColor = changeBgColorAccordingToWeatherCondition(condition)
+            binding.root.setBackgroundColor(bgColor)
 
-            binding.cardView.setOnClickListener{
+            binding.root.setOnClickListener{
                 item.name?.let { cityName  ->
                     onCardClick(cityName)
                 }

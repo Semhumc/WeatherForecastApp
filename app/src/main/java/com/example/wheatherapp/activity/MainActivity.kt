@@ -42,19 +42,19 @@ class MainActivity : AppCompatActivity() {
         )
 
 
-       //val viewPager2 = findViewById<ViewPager2>(R.id.viewPager)
-       //val adapter = ViewPagerAdapter(this, fragments)
-       //viewPager2.adapter = adapter
+     val viewPager2 = findViewById<ViewPager2>(R.id.viewPager)
+     val adapter = ViewPagerAdapter(this, fragments)
+     viewPager2.adapter = adapter
 
         //val navHostFragment =
         //    supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         //navController = navHostFragment.navController
-//
-       //val window = getWindow()
-       //window.setFlags(
-       //    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-       //    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-       //)
+
+       val window = getWindow()
+       window.setFlags(
+          WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+          WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+       )
 
 
         //window.setStatusBarColor(Color.TRANSPARENT)
